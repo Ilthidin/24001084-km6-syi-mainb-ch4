@@ -1,4 +1,4 @@
-package com.example.mainb.data
+package com.example.mainb.data.model
 
 import java.util.UUID
 
@@ -8,5 +8,4 @@ data class Catalog(
     var imgUrl: String,
     var price: Double,
     var desc: String,
-    var rating: Double,
 )

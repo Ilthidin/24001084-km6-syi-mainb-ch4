@@ -1,4 +1,4 @@
-package com.example.mainb.data
+package com.example.mainb.data.model
 
 import java.util.UUID
 

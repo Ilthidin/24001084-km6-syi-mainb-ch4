@@ -17,4 +17,14 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnEdit.setOnClickListener{
+            binding.tfName.isEnabled = !binding.tfName.isEnabled
+            binding.tfUsername.isEnabled = !binding.tfUsername.isEnabled
+            binding.tfEmail.isEnabled = !binding.tfEmail.isEnabled
+            binding.tfPhone.isEnabled = !binding.tfPhone.isEnabled
+        }
+    }
 }
