@@ -9,5 +9,4 @@ interface CategoryRepository {
 
 class CategoryRepositoryImpl(private val dataSource: CategoryDataSource) : CategoryRepository {
     override fun getCategories(): List<Category> = dataSource.getCategories()
-
 }

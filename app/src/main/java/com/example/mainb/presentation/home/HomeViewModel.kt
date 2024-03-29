@@ -6,8 +6,8 @@ import com.example.mainb.data.repository.CategoryRepository
 
 class HomeViewModel(
     private val categoryRepository: CategoryRepository,
-    private val catalogRepository: ProductRepository
+    private val ProductRepository: ProductRepository
 ) : ViewModel() {
-    fun getCatalog() = catalogRepository.getProducts()
+    fun getProduct() = ProductRepository.getProducts()
     fun getCategories() = categoryRepository.getCategories()
 }
