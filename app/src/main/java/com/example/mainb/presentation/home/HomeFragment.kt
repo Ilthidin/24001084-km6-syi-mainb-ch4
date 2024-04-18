@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.mainb.data.datasource.category.DummyCategoryDataSource
-import com.example.mainb.data.datasource.product.DummyProductDataSource
+import com.example.mainb.data.datasource.category.CategoryApiDataSource
+import com.example.mainb.data.datasource.product.ProductApiDataSource
 import com.example.mainb.data.model.Category
 import com.example.mainb.data.model.Product
 import com.example.mainb.data.repository.CategoryRepository
@@ -30,9 +30,9 @@ class HomeFragment : Fragment() {
     private var isGrid = true
 
     private val viewModel: HomeViewModel by viewModels {
-        val categoryDataSource = DummyCategoryDataSource()
+        val categoryDataSource = CategoryApiDataSource()
         val categoryRepository: CategoryRepository = CategoryRepositoryImpl(categoryDataSource)
-        val catalogDataSource = DummyProductDataSource()
+        val catalogDataSource = ProductApiDataSource()
         val catalogRepository: ProductRepository = ProductRepositoryImpl(catalogDataSource)
         GenericViewModelFactory.create(HomeViewModel(categoryRepository, catalogRepository))
     }

@@ -43,22 +43,6 @@ class PriceListAdapter(private val itemClick: (PriceItem) -> Unit) :
         dataDiffer.submitList(data)
     }
 
-    class CartViewHolder(
-        private val binding: DialogOrderBinding,
-        private val cartListener: CartListener?
-    ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Cart> {
-        override fun bind(item: Cart) {
-            setClickListeners(item)
-        }
-
-        fun setClickListeners(item: Cart) {
-            with(binding) {
-                btnHome.setOnClickListener {
-                    cartListener?.onDeleteAllClicked(item) }
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PriceItemViewHolder {
         val binding = ItemPriceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PriceItemViewHolder(binding, itemClick)

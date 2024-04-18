@@ -37,10 +37,4 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             }
         }
     }
-
-    fun deleteAll(item: Cart) {
-        viewModelScope.launch(Dispatchers.IO) {
-            cartRepository.deleteAll(item).collect()
-        }
-    }
 }

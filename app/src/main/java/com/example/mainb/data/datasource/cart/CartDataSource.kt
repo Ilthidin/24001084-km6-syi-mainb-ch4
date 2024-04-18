@@ -9,7 +9,7 @@ interface CartDataSource {
     suspend fun insertCart(cart: CartEntity): Long
     suspend fun updateCart(cart: CartEntity): Int
     suspend fun deleteCart(cart: CartEntity): Int
-    suspend fun deleteAll(cart: CartEntity)
+    suspend fun deleteAll()
 }
 
 class CartDatabaseDataSource(
@@ -23,6 +23,6 @@ class CartDatabaseDataSource(
 
     override suspend fun deleteCart(cart: CartEntity): Int = dao.deleteCart(cart)
 
-    override suspend fun deleteAll(cart: CartEntity) = dao.deleteAll()
+    override suspend fun deleteAll() = dao.deleteAll()
 
 }

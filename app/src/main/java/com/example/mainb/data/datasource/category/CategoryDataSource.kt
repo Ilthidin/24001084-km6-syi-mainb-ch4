@@ -1,7 +1,7 @@
 package com.example.mainb.data.datasource.category
 
-import com.example.mainb.data.model.Category
+import com.example.mainb.data.source.network.model.category.CategoriesResponse
 
 interface CategoryDataSource {
-    fun getCategories(): List<Category>
+    suspend fun getCategories(): CategoriesResponse
 }

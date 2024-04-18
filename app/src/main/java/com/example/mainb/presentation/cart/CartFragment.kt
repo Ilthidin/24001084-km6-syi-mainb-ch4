@@ -54,10 +54,6 @@ class CartFragment : Fragment() {
                 viewModel.setCartNotes(cart)
                 hideKeyboard()
             }
-
-            override fun onDeleteAllClicked(cart: Cart) {
-                viewModel.deleteAll(cart)
-            }
         })
     }
 

@@ -132,5 +132,4 @@ interface CartListener {
     fun onMinusTotalItemCartClicked(cart: Cart)
     fun onRemoveCartClicked(cart: Cart)
     fun onUserDoneEditingNotes(cart: Cart)
-    fun onDeleteAllClicked(cart: Cart)
 }
