@@ -1,13 +1,16 @@
 package com.example.mainb.presentation.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.example.mainb.data.repository.ProductRepository
 import com.example.mainb.data.repository.CategoryRepository
+import kotlinx.coroutines.Dispatchers
 
 class HomeViewModel(
     private val categoryRepository: CategoryRepository,
-    private val ProductRepository: ProductRepository
+    private val productRepository: ProductRepository
 ) : ViewModel() {
-    fun getProduct() = ProductRepository.getProducts()
-    fun getCategories() = categoryRepository.getCategories()
+    fun getProducts(categorySlug: String? = null) =
+        productRepository.getProducts(categorySlug).asLiveData(Dispatchers.IO)
+    fun getCategories() = categoryRepository.getCategories().asLiveData(Dispatchers.IO)
 }

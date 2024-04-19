@@ -6,5 +6,5 @@ import com.example.mainb.data.source.network.model.products.ProductResponse
 
 interface ProductDataSource {
     suspend fun getProducts(categorySlug: String? = null): ProductResponse
-    suspend fun createOrder(payload: CheckoutRequestPayload): CheckoutResponse
+    suspend fun createOrder(payload : CheckoutRequestPayload) : CheckoutResponse
 }

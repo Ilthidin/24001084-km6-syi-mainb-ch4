@@ -7,15 +7,15 @@ import androidx.annotation.Keep
 @Keep
 data class ProductItemResponse(
     @SerializedName("alamat_resto")
-    val alamatResto: String?,
+    val address: String?,
     @SerializedName("detail")
-    val detail: String?,
+    val desc: String?,
     @SerializedName("harga")
-    val harga: Int?,
+    val price: Double?,
     @SerializedName("harga_format")
-    val hargaFormat: String?,
+    val priceFormat: String?,
     @SerializedName("image_url")
-    val imageUrl: String?,
+    val imgUrl: String?,
     @SerializedName("nama")
-    val nama: String?
+    val name: String?
 )

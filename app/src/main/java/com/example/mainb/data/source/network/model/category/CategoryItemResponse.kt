@@ -6,8 +6,14 @@ import androidx.annotation.Keep
 
 @Keep
 data class CategoryItemResponse(
+    @SerializedName("id")
+    val id: String?,
     @SerializedName("image_url")
-    val imageUrl: String?,
+    val imgUrl: String?,
     @SerializedName("nama")
-    val nama: String?
+    val name: String?,
+    @SerializedName("slug")
+    val slug: String?,
+    @SerializedName("category_desc")
+    val categoryDesc: String?,
 )

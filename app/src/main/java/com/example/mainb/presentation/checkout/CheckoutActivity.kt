@@ -66,7 +66,7 @@ class CheckoutActivity : AppCompatActivity() {
 
             home_button.setOnClickListener {
                 val intent = Intent(this@CheckoutActivity, MainActivity::class.java)
-                startActivity(intent)
+                finish()
             }
             dialog.show()
         }

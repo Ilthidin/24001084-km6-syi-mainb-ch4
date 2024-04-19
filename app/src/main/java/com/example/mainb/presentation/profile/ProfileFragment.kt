@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.mainb.R
+import com.example.mainb.data.datasource.auth.AuthDataSource
 import com.example.mainb.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {

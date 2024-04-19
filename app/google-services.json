@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "564060983615",
+    "project_id": "mainb-5ce25",
+    "storage_bucket": "mainb-5ce25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564060983615:android:d2d06b80700a194033c38a",
+        "android_client_info": {
+          "package_name": "com.example.mainb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5WPsZjg8mD0l9ZExcXC4lQdq0ZWFYY9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
