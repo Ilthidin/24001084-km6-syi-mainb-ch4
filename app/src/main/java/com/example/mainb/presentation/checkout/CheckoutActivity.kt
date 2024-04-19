@@ -2,21 +2,24 @@ package com.example.mainb.presentation.checkout
 
 import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.mainb.R
 import com.example.mainb.data.datasource.cart.CartDataSource
 import com.example.mainb.data.datasource.cart.CartDatabaseDataSource
+import com.example.mainb.data.datasource.product.ProductApiDataSource
+import com.example.mainb.data.datasource.product.ProductDataSource
 import com.example.mainb.data.repository.CartRepository
 import com.example.mainb.data.repository.CartRepositoryImpl
+import com.example.mainb.data.repository.ProductRepository
+import com.example.mainb.data.repository.ProductRepositoryImpl
 import com.example.mainb.data.source.local.database.AppDatabase
+import com.example.mainb.data.source.network.services.MainBApiService
 import com.example.mainb.databinding.ActivityCheckoutBinding
 import com.example.mainb.presentation.cart.adapter.CartListAdapter
 import com.example.mainb.presentation.checkout.adapter.PriceListAdapter
@@ -33,9 +36,12 @@ class CheckoutActivity : AppCompatActivity() {
 
     private val viewModel: CheckoutViewModel by viewModels {
         val db = AppDatabase.getInstance(this)
+        val s = MainBApiService.invoke()
+        val pds: ProductDataSource = ProductApiDataSource(s)
+        val pr: ProductRepository = ProductRepositoryImpl(pds)
         val ds: CartDataSource = CartDatabaseDataSource(db.cartDao())
         val rp: CartRepository = CartRepositoryImpl(ds)
-        GenericViewModelFactory.create(CheckoutViewModel(rp))
+        GenericViewModelFactory.create(CheckoutViewModel(rp, pr))
     }
 
     private val adapter: CartListAdapter by lazy {
@@ -53,28 +59,66 @@ class CheckoutActivity : AppCompatActivity() {
         setupList()
         observeData()
         setClickListeners()
-
-        val mDialogButton: Button = findViewById(R.id.btn_checkout)
-
-        mDialogButton.setOnClickListener {
-            val dialog = Dialog(this@CheckoutActivity)
-            dialog.setContentView(R.layout.dialog_order)
-            dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            dialog.setCancelable(false)
-            dialog.window?.attributes?.windowAnimations = R.style.animation
-            val home_button: Button = dialog.findViewById(R.id.btn_home)
-
-            home_button.setOnClickListener {
-                val intent = Intent(this@CheckoutActivity, MainActivity::class.java)
-                finish()
-            }
-            dialog.show()
-        }
     }
 
     private fun setClickListeners() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
+        }
+        binding.btnCheckout.setOnClickListener {
+            doCheckout()
+        }
+    }
+
+    private fun showSuccessDialog() {
+        val dialog = Dialog(this@CheckoutActivity)
+        dialog.setContentView(R.layout.dialog_order)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        dialog.setCancelable(false)
+        dialog.window?.attributes?.windowAnimations = R.style.animation
+        val home_button: Button = dialog.findViewById(R.id.btn_home)
+        dialog.show()
+        home_button.setOnClickListener {
+            val intent = Intent(this@CheckoutActivity, MainActivity::class.java)
+            finish()
+        }
+    }
+
+    private fun doCheckout() {
+
+        viewModel.checkoutCart().observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.layoutState.root.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutContent.root.isVisible = true
+                    binding.layoutContent.rvCart.isVisible = true
+                    viewModel.deleteAllCart()
+                    showSuccessDialog()
+                },
+                doOnLoading = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutContent.root.isVisible = false
+                    binding.layoutContent.rvCart.isVisible = false
+                },
+                doOnError = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutContent.root.isVisible = false
+                    binding.layoutContent.rvCart.isVisible = false
+                    Toast.makeText(
+                        this,
+                        getString(R.string.error_checkout),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            )
         }
     }
 

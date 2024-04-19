@@ -37,24 +37,29 @@
     <string name="text_order_success">Pesanan Anda Berhasil</string>
     <string name="text_dialog_total">Total</string>
 
-    <string name="hint_name">Your name</string>
+    <string name="hint_name">Nama Anda</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
-    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_confirm_password">konfirmasi Password</string>
     <string name="text_log_in">Log in</string>
-    <string name="text_not_registered_yet_register_here">Not registered yet ? Register Here</string>
-    <string name="text_already_have_an_account_click_here">Already have an Account ? Login Here</string>
-    <string name="text_error_email_empty">Email should not be empty</string>
-    <string name="text_error_email_invalid">Enter a valid format email</string>
-    <string name="text_error_password_empty">Password should not be empty</string>
-    <string name="text_error_password_less_than_8_char">Password cannot less than 8 character</string>
+    <string name="text_not_registered_yet_register_here">Belum daftar? Daftar dulu disini</string>
+    <string name="text_already_have_an_account_click_here">Sudah punya akun? Masuk di sini</string>
+    <string name="text_error_email_empty">Email tidak boleh kosong</string>
+    <string name="text_error_email_invalid">Masukkan email yang benar</string>
+    <string name="text_error_password_empty">Password tidak boleh kosong</string>
+    <string name="text_error_password_less_than_8_char">Password tidak boleh kurang dari 8 karakter</string>
     <string name="text_register">Register</string>
-    <string name="text_password_does_not_match">Password doesn\'t match</string>
-    <string name="text_error_name_cannot_empty">Name cannot be empty</string>
-    <string name="text_highlight_login_here">Login Here</string>
-    <string name="text_highlight_register">Register Here</string>
-    <string name="text_change_profile">Change Profile</string>
-    <string name="text_change_password">Change Password</string>
+    <string name="text_password_does_not_match">Password tidak sesuai</string>
+    <string name="text_error_name_cannot_empty">Nama tidak boleh kosong</string>
+    <string name="text_highlight_login_here">Login di sini</string>
+    <string name="text_highlight_register">Daftar di sini</string>
+    <string name="text_change_profile">Ubah Profile</string>
+    <string name="text_change_password">Ubah Password</string>
     <string name="text_logout">Logout</string>
     <string name="title_activity_login">LoginActivity</string>
+
+    <string name="create_order_success">Create order Success</string>
+    <string name="close">Tutup</string>
+    <string name="error_checkout">Checkout Error</string>
+    <string name="text_btn_dialog">Selesai</string>
 </resources>

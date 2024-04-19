@@ -9,11 +9,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.mainb.R
+import com.example.mainb.data.datasource.auth.AuthDataSource
 import com.example.mainb.data.datasource.cart.CartDataSource
 import com.example.mainb.data.datasource.cart.CartDatabaseDataSource
 import com.example.mainb.data.model.Cart
 import com.example.mainb.data.repository.CartRepository
 import com.example.mainb.data.repository.CartRepositoryImpl
+import com.example.mainb.data.repository.UserRepository
+import com.example.mainb.data.repository.UserRepositoryImpl
 import com.example.mainb.data.source.local.database.AppDatabase
 import com.example.mainb.databinding.FragmentCartBinding
 import com.example.mainb.presentation.cart.adapter.CartListAdapter

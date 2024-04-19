@@ -16,11 +16,11 @@ import java.util.concurrent.TimeUnit
 
 interface MainBApiService {
 
-    @GET("categories")
+    @GET("category")
     suspend fun getCategories(): CategoriesResponse
 
-    @GET("products")
-    suspend fun getProducts(@Query("category") category: String? = null): ProductResponse
+    @GET("listmenu")
+    suspend fun getProducts(@Query("c") category: String? = null): ProductResponse
 
     @POST("order")
     suspend fun createOrder(@Body payload: CheckoutRequestPayload): CheckoutResponse
