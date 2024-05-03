@@ -45,7 +45,6 @@ object AppModules {
             single<MainBApiService> { MainBApiService.invoke() }
         }
 
-    // todo : add firebase module
     private val firebaseModule =
         module {
             single<AuthDataSource> { FirebaseAuthDataSource(get()) }
