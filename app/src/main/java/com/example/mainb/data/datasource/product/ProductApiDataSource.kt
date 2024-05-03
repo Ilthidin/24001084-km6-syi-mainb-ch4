@@ -6,7 +6,7 @@ import com.example.mainb.data.source.network.model.products.ProductResponse
 import com.example.mainb.data.source.network.services.MainBApiService
 
 class ProductApiDataSource(
-    private val service: MainBApiService
+    private val service: MainBApiService,
 ) : ProductDataSource {
     override suspend fun getProducts(categorySlug: String?): ProductResponse {
         return service.getProducts(categorySlug)

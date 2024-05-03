@@ -4,11 +4,10 @@ import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.example.mainb.R
 import com.example.mainb.data.datasource.cart.CartDataSource
@@ -27,11 +26,11 @@ class DetailProductActivity : AppCompatActivity() {
         ActivityDetailProductBinding.inflate(layoutInflater)
     }
     private val viewModel: DetailProductViewModel by viewModels {
-        val db = AppDatabase.getInstance(this)
+        val db = AppDatabase.createInstance(this)
         val ds: CartDataSource = CartDatabaseDataSource(db.cartDao())
         val rp: CartRepository = CartRepositoryImpl(ds)
         GenericViewModelFactory.create(
-            DetailProductViewModel(intent?.extras, rp)
+            DetailProductViewModel(intent?.extras, rp),
         )
     }
 
@@ -69,7 +68,8 @@ class DetailProductActivity : AppCompatActivity() {
                 doOnSuccess = {
                     Toast.makeText(
                         this,
-                        getString(R.string.text_add_to_cart_success), Toast.LENGTH_SHORT
+                        getString(R.string.text_add_to_cart_success),
+                        Toast.LENGTH_SHORT,
                     ).show()
                     finish()
                 },
@@ -78,7 +78,7 @@ class DetailProductActivity : AppCompatActivity() {
                 },
                 doOnLoading = {
                     Toast.makeText(this, getString(R.string.loading), Toast.LENGTH_SHORT).show()
-                }
+                },
             )
         }
     }
@@ -107,7 +107,11 @@ class DetailProductActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
-        fun startActivity(context: Context, product: Product) {
+
+        fun startActivity(
+            context: Context,
+            product: Product,
+        ) {
             val intent = Intent(context, DetailProductActivity::class.java)
             intent.putExtra(EXTRA_PRODUCT, product)
             context.startActivity(intent)

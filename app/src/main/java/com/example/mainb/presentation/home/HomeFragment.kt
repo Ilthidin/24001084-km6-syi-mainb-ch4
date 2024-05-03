@@ -27,7 +27,6 @@ import com.example.mainb.utils.GridSpacingItemDecoration
 import com.example.mainb.utils.proceedWhen
 
 class HomeFragment : Fragment() {
-
     private lateinit var productListAdapter: ProductListAdapter
     private lateinit var productGridAdapter: ProductGridAdapter
     private lateinit var binding: FragmentHomeBinding
@@ -99,15 +98,19 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setupListProduct()
         setupListCategory()
@@ -134,7 +137,7 @@ class HomeFragment : Fragment() {
             it.proceedWhen(
                 doOnSuccess = {
                     it.payload?.let { data -> bindCategoryList(data) }
-                }
+                },
             )
         }
     }
@@ -144,7 +147,7 @@ class HomeFragment : Fragment() {
             it.proceedWhen(
                 doOnSuccess = {
                     it.payload?.let { data -> bindProductList(data) }
-                }
+                },
             )
         }
     }

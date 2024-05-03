@@ -17,7 +17,7 @@ interface ProductRepository {
 }
 
 class ProductRepositoryImpl(
-    private val dataSource: ProductDataSource
+    private val dataSource: ProductDataSource,
 ) : ProductRepository {
     override fun getProducts(categorySlug: String?): Flow<ResultWrapper<List<Product>>> {
         return proceedFlow {
@@ -27,15 +27,18 @@ class ProductRepositoryImpl(
 
     override fun createOrder(products: List<Cart>): Flow<ResultWrapper<Boolean>> {
         return proceedFlow {
-            dataSource.createOrder(CheckoutRequestPayload(
-                orders = products.map {
-                    CheckoutItemPayload(
-                        notes = it.itemNotes,
-                        productId = it.productId.orEmpty(),
-                        quantity = it.itemQuantity
-                    )
-                }
-            )).status ?: false
+            dataSource.createOrder(
+                CheckoutRequestPayload(
+                    orders =
+                        products.map {
+                            CheckoutItemPayload(
+                                notes = it.itemNotes,
+                                productId = it.productId.orEmpty(),
+                                quantity = it.itemQuantity,
+                            )
+                        },
+                ),
+            ).status ?: false
         }
     }
 }

@@ -29,13 +29,12 @@ import com.example.mainb.utils.proceedWhen
 import com.example.mainb.utils.toIndonesianFormat
 
 class CheckoutActivity : AppCompatActivity() {
-
     private val binding: ActivityCheckoutBinding by lazy {
         ActivityCheckoutBinding.inflate(layoutInflater)
     }
 
     private val viewModel: CheckoutViewModel by viewModels {
-        val db = AppDatabase.getInstance(this)
+        val db = AppDatabase.createInstance(this)
         val s = MainBApiService.invoke()
         val pds: ProductDataSource = ProductApiDataSource(s)
         val pr: ProductRepository = ProductRepositoryImpl(pds)
@@ -49,7 +48,6 @@ class CheckoutActivity : AppCompatActivity() {
     }
     private val priceItemAdapter: PriceListAdapter by lazy {
         PriceListAdapter {
-
         }
     }
 
@@ -75,7 +73,7 @@ class CheckoutActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.dialog_order)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.WRAP_CONTENT,
         )
         dialog.setCancelable(false)
         dialog.window?.attributes?.windowAnimations = R.style.animation
@@ -88,7 +86,6 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun doCheckout() {
-
         viewModel.checkoutCart().observe(this) {
             it.proceedWhen(
                 doOnSuccess = {
@@ -115,9 +112,9 @@ class CheckoutActivity : AppCompatActivity() {
                     Toast.makeText(
                         this,
                         getString(R.string.error_checkout),
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
-                }
+                },
             )
         }
     }

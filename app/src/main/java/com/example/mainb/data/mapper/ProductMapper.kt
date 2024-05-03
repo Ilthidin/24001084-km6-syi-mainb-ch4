@@ -9,9 +9,10 @@ fun ProductItemResponse?.toProduct() =
         price = this?.price ?: 0.0,
         imgUrl = this?.imgUrl.orEmpty(),
         desc = this?.desc.orEmpty(),
-        address = this?.address.orEmpty()
+        address = this?.address.orEmpty(),
     )
 
-fun Collection<ProductItemResponse>?.toProducts() = this?.map {
-    it.toProduct()
-} ?: listOf()
+fun Collection<ProductItemResponse>?.toProducts() =
+    this?.map {
+        it.toProduct()
+    } ?: listOf()

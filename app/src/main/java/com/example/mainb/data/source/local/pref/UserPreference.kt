@@ -1,17 +1,16 @@
 package com.example.mainb.data.source.local.pref
 
-import android.content.Context
+import android.content.SharedPreferences
 import com.example.mainb.utils.SharedPreferenceUtils
 import com.example.mainb.utils.SharedPreferenceUtils.set
 
 interface UserPreference {
     fun isUsingDarkMode(): Boolean
+
     fun setUsingDarkMode(isUsingDarkMode: Boolean)
 }
 
-class UserPreferenceImpl(private val context: Context) : UserPreference {
-
-    private val pref = SharedPreferenceUtils.createPreference(context, PREF_NAME)
+class UserPreferenceImpl(private val pref: SharedPreferences) : UserPreference {
 
     override fun isUsingDarkMode(): Boolean = pref.getBoolean(KEY_IS_USING_DARK_MODE, false)
 
